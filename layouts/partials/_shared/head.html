@@ -1,0 +1,123 @@
+<head>
+	<meta charset="utf-8">
+	{{ partialCached "_shared/csp.html" . }}
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="theme-color" content="#FFFFFF">
+	<link rel="manifest" href="{{ "/manifest.json" | urlize | relURL }}">
+	{{ if .Params.image }}{{ $original := print "images/" (path.Base .Params.image) }}{{ $originalImg := .Resources.GetMatch $original }}{{ if $originalImg }}{{ $thumbnailImg := $originalImg.Resize "90x" }}{{ printf `<meta name="thumbnail" content="%s">` $thumbnailImg.RelPermalink | safeHTML }}{{end}}{{end}}
+	{{ hugo.Generator }}
+	{{ partialCached "_shared/icons.html" . }}
+	{{ with .Site.Params.logo }}<link rel="icon" href="{{ . | urlize | relURL }}">{{ end }}{{ if .Params.canonicalUrl }}
+	<link rel="canonical" href="{{ .Params.canonicalUrl }}">{{ end }}{{ $title := printf "%s | %s" .Page.Title .Site.Title }}{{ $mainPage := false }}{{ if eq .Page.Title .Site.Title }}{{ $title = .Page.Title }}{{ $mainPage = true }}{{ end }}
+	<title>{{ $title }}</title>
+	{{ with or .Page.Description .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
+	{{ with or .Params.tags .Site.Params.keywords  }}{{ with delimit . "," }}<meta name="keywords" content="{{ . }}">{{ end }}{{ end }}
+	<link rel=alternate type=application/rss+xml href=https://blog.jeremylikness.com/blog/index.xml title="Developer for Life">
+	<!-- twitter, google, and open graph support -->
+	{{ if or .Params.image .Site.Params.author.thumbnail }}
+		<meta name="twitter:card" content="summary_large_image" />
+		{{ with or .Params.image .Site.Params.author.thumbnail }}
+			<meta itemprop="image" content="{{ . | absURL }}"/>
+			<meta property="twitter:image" content="{{ . | absURL }}"/>
+			<meta property="og:image" content="{{ . | absURL }}" />
+		{{ end }}
+	{{ else }}
+		<meta name="twitter:card" content="summary" />
+	{{ end }}
+	<meta name="twitter:creator" content="@JeremyLikness" />
+	<meta name="twitter:site" content="@JeremyLikness" />
+	<meta property="og:site_name" content="{{ .Site.Title }}"/>
+	{{ $type := "website"}}{{ if .IsPage }}{{ $type = "article" }}{{ end }} 
+	<meta property="og:type" content="{{ $type }}"/>
+	<meta property="og:url" content="{{ .Permalink }}" />
+	{{ with .Page.Title }}
+	<meta itemprop="name" content="{{ . }}" />
+	<meta property="og:title" content="{{ . }}" />
+	<meta property="twitter:title" content="{{ . }}" />
+	{{ end }}
+	{{ with or .Page.Description .Site.Params.description }}
+	<meta property="og:description" content="{{ . }}" />
+	<meta property="twitter:description" content="{{ . }}" />
+	<meta itemprop="description" content="{{ . }}" />
+	{{ end }}
+	<!-- end twitter support -->
+	<noscript>
+	<link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | urlize | relURL }}">		
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+		integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+		rel="stylesheet">
+	<link href="{{ "/css/medium.css" | urlize | relURL }}" rel="stylesheet">
+	<link href="{{ "/css/additional.css" | urlize | relURL }}" rel="stylesheet">
+	<link href="{{ "/css/custom.css" | urlize | relURL }}" rel="stylesheet">
+	</noscript>
+	{{ if .IsPage }}
+	{{ if eq .Type "blog" }}
+	{{ $titleMeta := printf "%s" .Title }}
+	{{ $description := printf "%s" .Summary }}
+	{{ if .Description }}
+	{{ $description = printf "%s" .Description }}
+	{{ end }}
+	<script type="application/ld+json">
+	{
+		"@context"	:	"http://schema.org",
+		"@type"		:	"BlogPosting",
+		"@id"		:	"{{ .Permalink }}",
+		"mainEntityOfPage"	:	{
+			"@type"	: 	"WebPage",
+			"@id"	:	"{{ .Permalink }}"
+		},
+		"name"		: 	{{ $titleMeta }},
+		{{ if .Params.comments }}
+		"discussionUrl" : "{{ .Permalink }}#comments",
+		{{ end }}
+		"headline"	:	{{ $titleMeta }},
+		"description"	: {{ $description }},
+		"abstract"	:	{{ $description }},
+		"inLanguage"	: "en-US",
+		"isFamilyFriendly"	: 	"true",
+		"author"		: {
+			"@type"	: "Person",
+			"name"	: "{{ .Params.author }}",
+			"url"	: "{{"/about" | absURL}}"
+		},
+		"creator"		: {
+			"@type"	: "Person",
+			"name"	: "{{ .Params.author }}",
+			"url"	: "{{"/about" | absURL}}"
+		},
+		"accountablePerson"	: {
+			"@type"	: "Person",
+			"name"	: "{{ .Params.author }}",
+			"url"	: "{{"/about" | absURL}}"
+		},
+		"copyrightHolder"	: {
+			"@type"	: "Person",
+			"name"	: "{{ .Params.author }}",
+			"url"	: "{{"/about" | absURL}}"
+		},
+		"copyrightYear"	: "{{ dateFormat "2006" (default .Date (.PublishDate)) }}",
+		"datePublished"	: "{{ dateFormat "2006-01-02" (default .Date (.PublishDate)) }}",
+		"dateCreated"	: "{{ dateFormat "2006-01-02" (default .Date (.PublishDate)) }}",
+		"dateModified"  : "{{ dateFormat "2006-01-02" (default .Date (.Params.lastmod)) }}",
+		"publisher"	:	{
+			"@type" : "Organization",
+			"name":	"{{ .Site.Title }}",
+			"url": "https://blog.jeremylikness.com/",
+			"logo": {
+				"@type"	:	"ImageObject",
+				"contentUrl"	:	"{{ .Site.Params.logo | absURL }}",
+				"url"	:	"{{ .Site.Params.logo | absURL }}"
+			}
+		},
+		"url"	:	"{{ .Permalink }}",
+		"wordCount"	:	"{{ .WordCount }}",
+		"image"	:	"{{ .Params.image | absURL }}",
+		"keywords"	:	"{{ range $i, $e := .Params.tags }}{{ if $i }},{{ end }}{{ $e }}{{ end}}"
+	}
+	</script>
+	{{ end }}
+	{{ end }}
+	<script src="/js/normalize.js"></script>
+	{{ partial "_shared/customanalytics.html" . }}
+</head>

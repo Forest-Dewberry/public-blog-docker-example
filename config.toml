@@ -1,0 +1,196 @@
+baseURL = "https://blog.jeremylikness.com/"
+languageCode = "en-us"
+title = "Developer for Life"
+theme = "mediumish-gohugo-theme"
+summaryLength = 50
+copyright = "Jeremy Likness - All Rights Reserved"
+disqusShortname = "developerforlife"
+enableEmoji = true
+enableRobotsTXT = true
+pygmentsStyle = "friendly"
+ignoreErrors = ["error-remote-getjson"]
+
+[markup.goldmark.renderer]
+unsafe= true
+
+[privacy]
+  [privacy.disqus]
+    disable = false
+  [privacy.instagram]
+    disable = false
+    simple = true
+  [privacy.twitter]
+    disable = false
+    enableDNT = true
+    simple = false
+  [privacy.vimeo]
+    disable = false
+    simple = false
+  [privacy.youtube]
+    disable = false
+    privacyEnhanced = true
+
+[taxonomies]
+  tag = "tags"
+  year = "years"
+  series = "series"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "RSS"]
+
+[params]
+    logo = "images/logo.png"
+    description = "Code all the things."
+    keywords = ["cloud", "webassembly", "azure", "programming", "coding"]
+    swVersion = 3.7
+
+[params.social]
+  github = "JeremyLikness"
+  linkedin = "JeremyLikness"
+  twitter = "JeremyLikness"
+  instagram = "JeremyLikness"
+
+[params.index]
+  picture = "/images/jumbotron.jpg"
+  title = "Developer for Life"
+  subtitle = "Code all the things!"
+  alertbar = false
+
+[params.author]
+  name = "Jeremy Likness"
+  thumbnail = "/images/author.png"
+  description = "Empowering developers to be their best."
+
+[params.customgtag]
+  gtag = "UA-1227465-12"
+
+[params.csp]
+  childsrc = ["'self'"]
+  fontsrc = ["'self'",
+    "https://use.fontawesome.com",
+    "https://fonts.gstatic.com",
+    "https://public.slidesharecdn.com",
+    "disqus.com",
+    "disquscdn.com",
+    "*.disqus.com",
+    "*.disquscdn.com"]
+  formaction = ["'self'",
+    "https://syndication.twitter.com/",
+    "https://platform.twitter.com",
+    "disqus.com",
+    "disquscdn.com",
+    "*.disqus.com",
+    "*.disquscdn.com"]
+  framesrc = ["'self'",
+    "https://cse.google.com",
+    "https://player.vimeo.com",
+    "www.youtube.com",
+    "www.youtube-nocookie.com",
+    "https://platform.twitter.com",
+    "https://syndication.twitter.com",
+    "https://jsfiddle.net",
+    "fiddle.jshell.net",
+    "*.jsfiddle.net",
+    "www.instagram.com",
+    "https://kuula.co",
+    "https://www.slideshare.net",
+    "https://www.google.com",
+    "https://googleads.g.doubleclick.net",
+    "disqus.com",
+    "disquscdn.com",
+    "*.disqus.com",
+    "*.disquscdn.com"]
+  imgsrc = ["'self'",
+    "https://jeremylikness.visualstudio.com",
+    "https://www.google-analytics.com",
+    "https://stats.g.doubleclick.net",
+    "https://pagead2.googlesyndication.com",
+    "*.google.com",
+    "*.gstatic.com",
+    "*.amazon-adsystem.com",
+    "https://www.googleapis.com",
+    "https://images-na.ssl-images-amazon.com",
+    "https://platform.twitter.com",
+    "*.twimg.com",
+    "https://syndication.twitter.com",
+    "*.cdninstagram.com",
+    "data:",
+    "https://files.kuula.io",
+    "disqus.com",
+    "disquscdn.com",
+    "*.disqus.com",
+    "*.disquscdn.com"]
+  objectsrc = ["'none'"]
+  stylesrc = ["'self'",
+    "'unsafe-inline'",
+    "https://use.fontawesome.com",
+    "https://fonts.googleapis.com",
+    "https://www.google.com",
+    "https://platform.twitter.com",
+    "*.twimg.com",
+    "disqus.com",
+    "disquscdn.com",
+    "*.disqus.com",
+    "*.disquscdn.com"]
+  scriptsrc = ["'self'",
+    "'unsafe-inline'",
+    "https://platform.twitter.com",
+    "https://cdn.syndication.twimg.com",
+    "*.amazon-adsystem.com",
+    "https://www.google-analytics.com",
+    "cse.google.com",
+    "https://www.google.com",
+    "https://pagead2.googlesyndication.com",
+    "https://adservice.google.com",
+    "*.googleadservices.com",
+    "https://www.googletagservices.com",
+    "*.googletagmanager.com",
+    "jsfiddle.net",
+    "www.instagram.com",
+    "disqus.com",
+    "disquscdn.com",
+    "*.disqus.com",
+    "*.disquscdn.com"]
+  prefetchsrc = ["'self'",
+    "disqus.com",
+    "disquscdn.com",
+    "*.disqus.com",
+    "*.disquscdn.com"]
+
+## Main Menu
+[[menu.main]]
+    name = "🏠 Home"
+    weight = 50
+    identifier = ""
+    url = "/"
+[[menu.main]]
+    name = "🔍 Search"
+    weight = 75
+    identifier = "search"
+    url = "/static/search"
+[[menu.main]]
+    name = "📃 Blog"
+    weight = 100
+    identifier = "blog"
+    url = "/blog"
+[[menu.main]]
+    name = "📆 Upcoming Talks"
+    weight = 150
+    identifier = "talks"
+    url = "/blog/2017-08-17_upcoming-talks/"
+[[menu.main]]
+    name = "🗣 Past Presentations"
+    weight = 200
+    identifier = "presentations"
+    url = "/blog/2017-08-17_presentations-archive/"
+[[menu.main]]
+    name = "▶ Videos"
+    weight = 250
+    identifier = "videos"
+    url = "https://www.youtube.com/playlist?list=PL1VfiVM16kp-sQ3D3XDLopmScoaOQibFb"
+[[menu.main]]
+    name = "ℹ About"
+    identifier = "about"
+    weight = 300
+    url = "/static/about"

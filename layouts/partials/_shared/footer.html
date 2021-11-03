@@ -1,0 +1,26 @@
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div classs="row">
+            <div class="text-center">
+                <strong><a href="{{ "/privacy" | urlize | relURL }}">Privacy Policy</a></strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 text-center text-lg-left">
+                &copy; Copyright {{ .Site.Copyright }}
+            </div>
+            <div class="col-md-4 col-sm-4 text-center">
+                <span>Last generated: {{now.Format "Mon, 02 Jan 2006 15:04:05 PT"}}</span>
+            </div>
+            <div class="col-md-4 col-sm-4 text-center text-lg-right">
+                <a target="_blank" href="https://www.wowthemes.net">Mediumish Theme</a> by WowThemes.net
+            </div>
+        </div>
+    </div>
+</footer>
+{{ partial "_shared/sw.html" . }}
+{{ partial "_shared/css.html" . }}
+<!-- End Footer
+================================================== -->
